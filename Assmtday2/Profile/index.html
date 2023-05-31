@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<div>
+<h1 style="text-align: center;">Profile</h1>
+</div>
+<div style="justify-content: center;justify-items: center;">
+<img src="assets/imresizer-1682740475419.jpg"  border-radius : 50% >
+</div>
+<div>
+<h2 style="text-align: center;">Srihari Prithvi</h2>
+<p id = "hobb" > </p>
+</div>
+
+<script>
+   
+    var details = {
+        firstName : "Srihari",
+        lastName  : "Meka",
+        age : 23 ,
+        height : 6 ,
+        country : "Indian" ,
+        bloodGroup : "B+",
+        Hobbies : [{
+            cricket : "played at school level"
+            
+        },{
+            football : "won with college team"
+        }]
+    }
+    console.log(details.Hobbies[1].football)
+    document.getElementById("hobb").innerHTML = "My last Hobby Achievement   =   "+details.Hobbies[1].football;
+</script>
+</body>
+<style>
+    img
+        { border-radius: 50%; 
+          width: 160px;
+          height: 160px;
+          display: block;
+          margin: 0 auto;
+}  
+    
+</style>
+</html>
