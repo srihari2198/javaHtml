@@ -29,8 +29,8 @@
             football : "won with college team"
         }]
     }
-    console.log(details.Hobbies[1].football)
-    document.getElementById("hobb").innerHTML = "My last Hobby Achievement   =   "+details.Hobbies[1].football;
+    console.log(details.Hobbies[details.Hobbies.length-1].football)
+    document.getElementById("hobb").innerHTML = "My last Hobby Achievement   =   "+details.Hobbies.splice(-1,1)[0].football;
 </script>
 </body>
 <style>
