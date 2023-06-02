@@ -10,5 +10,9 @@ public class Student {
 		this.name = name;
 	}
 	
-
+   public static void main(String[] args){
+	Student s = new Student();
+	s.setName = 'tom';
+	System.out.println(s.getName)
+   }
 }
