@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<div>
+<h2 style="text-align: center;">Srihari Prithvi</h2>
+<button onclick="details.addHobby()">Add Hobby</button>
+<button onclick="details.delHobby()">Del Hobby</button>
+<p id = "hobb" > </p>
+
+</div>
+
+<script>
+   
+   var details = {
+    firstName: "Srihari",
+    lastName: "Meka",
+    age: 23,
+    height: 6,
+    country: "Indian",
+    bloodGroup: "B+",
+    hobbies: ['chess', 'cricket', 'football'],
+    getHobbies: function() {
+        return this.hobbies;
+    },
+    addHobby: function() {
+        let h = prompt('enter Hobby you want add','here'); 
+        this.hobbies.push(h);
+        document.getElementById("hobb").innerHTML = "My hobbies are   =   "+ details.getHobbies();
+        console.log(details.getHobbies());
+    },
+    delHobby: function () {
+        let   h=prompt('enter Hobby you want add','here');
+        for (let index = 0; index < this.hobbies.length; index++) {
+         
+            if(h===this.hobbies[index]){
+                this.hobbies.splice(index,1);
+            }
+            
+        }
+        document.getElementById("hobb").innerHTML = "My hobbies are   =   "+ details.getHobbies();
+        console.log(details.getHobbies());
+    }
+};
+
+
+    
+</script>
+</body>
+
+</html>
