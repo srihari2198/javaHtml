@@ -1,4 +1,4 @@
-package task2;
+package javaAssign.Task3;
 
 public   class Animal {
 	

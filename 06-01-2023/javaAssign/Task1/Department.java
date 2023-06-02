@@ -1,4 +1,4 @@
-package task2;
+package javaAssign.Task1;
 
 public abstract class Department {
 	

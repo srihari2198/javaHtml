@@ -12,7 +12,7 @@ public class Student {
 	
    public static void main(String[] args){
 	Student s = new Student();
-	s.setName = 'tom';
-	System.out.println(s.getName)
+	s.setName("tom");
+	System.out.println(s.getName());
    }
 }

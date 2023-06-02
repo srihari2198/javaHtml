@@ -1,4 +1,4 @@
-package task2;
+package javaAssign.Task2;
 
 public class Runclass2 {
 	
