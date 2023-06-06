@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <title>
+        srihari
+    </title>
+    <body>
+        <!--form action="details"-->
+         <p>enter First Name:
+         <input type="text" id="fn" placeholder="firstName"></input><br>
+         <p>enter Last name:
+         <input type="text"  id = "ln"></input><br>
+         <p>enter Email:
+         <input type="email" id="email"></input><br>
+         <p>enter DOB:
+         <input type="date"  id="date"></input><br>
+         <p>enter phone number:
+         <input type="number" id="number"></input><br>
+         </p>
+         <button onclick="displayDetails() " > submit</button>
+       
+         <p  id="opField"></p>
+        <!--/form-->
+
+        <script>
+            function displayDetails() {
+               document.getElementById("opField").innerHTML = 
+               "First Name:"+document.getElementById("fn").value +"<br>"+
+               "Last Name:"+document.getElementById("ln").value +"<br>"+
+               "Email"+document.getElementById("email").value +"<br>"+
+               "DOB:"+document.getElementById("date").value +"<br>"+
+               "Phone Number"+document.getElementById("number").value 
+               ;
+                
+            }
+        </script>
+    </body>
+
+
+</html>
