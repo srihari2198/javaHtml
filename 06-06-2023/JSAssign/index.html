@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <title>
+        srihari
+    </title>
+    <body>
+        <form action="" id="userInfo">
+            <label for="fn">Enter First Name:</label>
+            <input type="text" id="fn" placeholder="firstName"><br>
+            
+            <label for="ln">Enter Last Name:</label>
+            <input type="text" id="ln"><br>
+            
+            <label>Gender:</label><br>
+            <input type="radio" id="male" name="gender" value="Male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="Female">
+            <label for="female">Female</label><br>
+            
+            <label for="email">Enter Email:</label>
+            <input type="email" id="email"><br>
+            
+            <label for="date">Enter Date of Birth:</label>
+            <input type="date" id="date"><br>
+            
+            <label for="number">Enter Phone Number:</label>
+            <input type="number" id="number"><br>
+
+            <input type="checkbox" class= "hobby" name="h1" value="cricket">
+            <label for="h1"> playing Cricket</label><br>
+            <input type="checkbox" class= "hobby" name="h2" value="soccer">
+            <label for="h1"> playing soccer</label><br>
+            <input type="checkbox" class= "hobby" name="h3" value="chess">
+            <label for="h1"> playing chess</label><br><br>
+
+
+            
+            <button onclick="displayDetails(event)">Submit</button>
+          </form>
+          
+        <p  id="opField"></p>
+
+        <script>
+            function displayDetails(e) {
+                e.preventDefault();
+                console.log(Array.from(document.getElementsByClassName("hobby")).filter(a => a.checked).map(b => b.value).toString())
+               document.getElementById("opField").innerHTML = 
+               "First Name:"+document.getElementById("fn").value +"<br>"+
+               "Last Name:"+document.getElementById("ln").value +"<br>"+
+               "gender:"+Array.from(document.getElementsByName("gender")).filter(a => a.checked)[0].value+"<br>"+
+               "Email:"+document.getElementById("email").value +"<br>"+
+               "DOB:"+document.getElementById("date").value +"<br>"+
+               "Phone Number:"+document.getElementById("number").value +"<br>"+
+               "Hobbies:"+Array.from(document.getElementsByClassName("hobby")).filter(a => a.checked).map(b => b.value).toString()
+               ;
+                
+            }
+        </script>
+    </body>
+
+
+</html>
