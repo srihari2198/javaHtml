@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<div>
+
+</div>
+
+<script>
+    var data ={
+        numbers : [5,7,1,9,6,4]
+    }
+
+    data.__proto__.secSmall = function (){
+        return this.numbers.sort()[1];
+    } 
+
+    Array.prototype.secSmall = function (){
+        return data.numbers.sort()[1];
+    } 
+
+    Object.prototype.secSmall = function (){
+        return data.numbers.sort()[1];
+    }
+
+    
+    console.log(data.secSmall());
+    console.log(data.numbers.secSmall());
+    console.log(Object.secSmall());
+</script>
+</body>
+</html>
