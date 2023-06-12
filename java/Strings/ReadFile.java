@@ -24,7 +24,8 @@ public class ReadFile {
         }
 
 
-       Arrays.sort(stu);
+       Arrays.sort(stu ,
+               new SortByName() );
 
         for (Student s2:
              stu) {
