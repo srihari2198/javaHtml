@@ -1,6 +1,6 @@
 package ThreasSync;
 
-public class DeadLock extends Thread{
+public class DeadLock {
     Object a1 = new Object();
     Object a2 = new Object();
     public static void main(String[] args) {
@@ -10,13 +10,13 @@ public class DeadLock extends Thread{
             public void run() {
                 synchronized (d.a1){
                     try {
-                        System.out.println("Using Resource 1");
+                        System.out.println(Thread.currentThread().getName()+"Using Resource 1");
                         Thread.sleep(300);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                     synchronized (d.a2){
-                        System.out.println("Using Resource 2");
+                        System.out.println(Thread.currentThread().getName()+"Using Resource 2");
                     }
                 }
             }
@@ -27,13 +27,13 @@ public class DeadLock extends Thread{
             public void run() {
                 synchronized (d.a2){
                     try {
-                        System.out.println("Using Resource 2");
+                        System.out.println(Thread.currentThread().getName()+"Using Resource 2");
                         Thread.sleep(300);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                     synchronized (d.a1){
-                        System.out.println("Using Resource 1");
+                        System.out.println(Thread.currentThread().getName()+"Using Resource 1");
                     }
                 }
             }
