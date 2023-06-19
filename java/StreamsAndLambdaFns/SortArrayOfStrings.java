@@ -16,15 +16,16 @@ public class SortArrayOfStrings {
         System.out.println("-------------------------");
 
         ss2.sorted((a,b) -> a.length()-b.length())
-                .sorted(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                if(o1.length()==o2.length())
-                    return o2.charAt(o2.length()-1)-o1.charAt(o1.length()-1);
-
-                return 0;
-            }
+                .sorted((a,b) -> {
+                    if(a.length()==b.length())
+                        return b.charAt(b.length()-1)-a.charAt(a.length()-1);
+                    return 0;
         }).forEach(System.out::println);
+
+        System.out.println("-------------------------");
+
+
+
     }
 
 
