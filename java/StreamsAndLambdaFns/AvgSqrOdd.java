@@ -9,7 +9,7 @@ public class AvgSqrOdd {
         Stream<Integer> si = Stream.of(arr);
 
         System.out.println(si.filter(i -> i%2!=0)
-                .map(i -> Math.sqrt(i)).mapToDouble(i -> Double.parseDouble(String.valueOf(i))).average());
+                .mapToDouble(i -> i*i).average());
 
     }
 }
