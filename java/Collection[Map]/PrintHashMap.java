@@ -27,6 +27,9 @@ public class PrintHashMap {
             hm.put(firstName,new Student(firstName, lastName, gpa));
 
         }
+
+        Set<Map.Entry<String,Student>> s1 = hm.entrySet() ;
+
        for(Map.Entry<String,Student> he : hm.entrySet())
            System.out.println(he.getKey()+"  "+he.getValue());
 
