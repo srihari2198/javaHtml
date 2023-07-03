@@ -17,6 +17,7 @@ public class MinMax {
                 l = arr[i];
             }
         }
+        //checking
 
         System.out.println("Smallest is: " + s);
         System.out.println("Largest is: " + l);
