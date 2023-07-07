@@ -40,6 +40,22 @@ public class LoginController {
         return true;
     }
 
+    @PostMapping(path="/editSubmission")
+    public Submission editSubmission(@RequestBody Submission s){
+        return submissionService.updateSubmission(s.getId(),s);
+    }
+
+    @PostMapping(path="/editUser")
+    public User editUser(@RequestBody User u){
+        return loginService.updateUser(u.getId(),u);
+    }
+
+    @DeleteMapping(path="/delSubmission/{id}")
+    public void delSubmission(@PathVariable Long id){
+         submissionService.deleteSubmission(id);
+
+    }
+
     @GetMapping(path = "/getUser")
     public User getDetails(String email){
         User u = loginService.getLoginByEmail(email);
@@ -48,6 +64,16 @@ public class LoginController {
 
         return u;
     }
+
+    @GetMapping(path = "/getAllUsers")
+    public List<User> getAllUsers(){
+
+
+
+
+        return loginService.getAllUsers();
+    }
+
     @PostMapping(path = "/checkUser")
     public boolean checkDetails(@RequestBody User details) {
         boolean result = false;
@@ -72,6 +98,8 @@ public class LoginController {
 
         return true;
     }
+
+
 
 
 
