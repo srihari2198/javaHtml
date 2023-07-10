@@ -3,6 +3,8 @@ package com.srihari.restdemo.controller;
 import com.srihari.restdemo.model.SubmissionDTO;
 import com.srihari.restdemo.service.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,12 +13,10 @@ import java.util.List;
 @RequestMapping("/submission")
 public class SubmissionController {
 
-    private final SubmissionService submissionService;
+
 
     @Autowired
-    public SubmissionController(SubmissionService submissionService) {
-        this.submissionService = submissionService;
-    }
+    private SubmissionService submissionService;
 
     @GetMapping("get/{id}")
     public SubmissionDTO getSubmission(@PathVariable String id) {
@@ -32,8 +32,11 @@ public class SubmissionController {
     }
 
     @PostMapping(path="/add")
-    public SubmissionDTO addSubmission(@RequestBody SubmissionDTO submission) {
-        return submissionService.addSubmission(submission);
+    public ResponseEntity<SubmissionDTO> addSubmission(@RequestBody SubmissionDTO submission) {
+        ResponseEntity<SubmissionDTO> re= new ResponseEntity<>(HttpStatus.CREATED);
+        re=ResponseEntity.status(re.getStatusCode()).body(submissionService.addSubmission(submission));
+
+        return re;
 
     }
 
@@ -44,8 +47,9 @@ public class SubmissionController {
     }
 
     @DeleteMapping("delete/{id}")
-    public void deleteSubmission(@PathVariable String id) {
-         submissionService.deleteSubmission(id);
+    public ResponseEntity deleteSubmission(@PathVariable String id) {
+        submissionService.deleteSubmission(id);
+      return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null) ;
 
     }
 
