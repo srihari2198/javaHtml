@@ -2,7 +2,7 @@ package Strings;
 
 public class Student implements Comparable<Student>{
 
-    String fn;
+    public String fn;
     String ln;
     public float gpa;
 
