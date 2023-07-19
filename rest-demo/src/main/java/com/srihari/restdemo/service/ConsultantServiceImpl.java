@@ -53,6 +53,15 @@ public class ConsultantServiceImpl implements ConsultantService {
     public List<ConsultantDetail> getAll() {
         return repository.findAll();
     }
+
+    public List<ConsultantDetail> getByFirstName(String firstName) {
+        return repository.findByFirstName(firstName);
+    }
+
+//    public List<ConsultantDetail> getAllByFirstName(String firstName) {
+//
+//        return repository.findAllByFirstName(List.of(firstName));
+//    }
 }
 
 

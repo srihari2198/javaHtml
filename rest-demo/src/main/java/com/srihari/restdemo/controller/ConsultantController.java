@@ -2,6 +2,7 @@ package com.srihari.restdemo.controller;
 
 import com.srihari.restdemo.entity.ConsultantDetail;
 import com.srihari.restdemo.service.ConsultantService;
+import com.srihari.restdemo.service.ConsultantServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class ConsultantController {
 
     @Autowired
-    private ConsultantService service;
+    private ConsultantServiceImpl service;
 
     @GetMapping("/get/{id}")
     public ResponseEntity<ConsultantDetail> getConsultantDetail(@PathVariable long id) {
@@ -27,9 +28,18 @@ public class ConsultantController {
         }
     }
 
+
+
     @GetMapping("/getAll")
     public List<ConsultantDetail> getAllConsultantDetails() {
         return service.getAll();
+    }
+
+
+
+    @GetMapping("/getByName/{name}")
+    public List<ConsultantDetail> getAllByName(@PathVariable String name) {
+        return service.getByFirstName(name);
     }
 
     @PostMapping("/add")
