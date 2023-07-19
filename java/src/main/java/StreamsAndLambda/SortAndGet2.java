@@ -1,5 +1,8 @@
 package StreamsAndLambda;
 
+import Strings.Employee;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,5 +40,15 @@ public class SortAndGet2 {
 
 
 
+
+        List<Employee> lemp = Arrays.asList(
+                new Employee("Srihari", LocalDate.of(2023,06,04),"male"),
+                new Employee("uday", LocalDate.of(2022,01,04),"male"),
+                new Employee("narain", LocalDate.of(2023,03,04),"male"),
+                new Employee("ash", LocalDate.of(2023,06,04),"female")
+        );
+        System.out.println("---------------------------------------------");
+
+        lemp.stream().filter(a -> a.getGender().equals("male") && a.getDob().isAfter(LocalDate.now().minusMonths(6))).forEach(System.out::println);
    }
 }

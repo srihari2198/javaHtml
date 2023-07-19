@@ -6,6 +6,7 @@ public class Student implements Comparable<Student>{
     String ln;
     public float gpa;
 
+
     public Student(String fn, String ln, float gpa) {
         this.fn = fn;
         this.ln = ln;
