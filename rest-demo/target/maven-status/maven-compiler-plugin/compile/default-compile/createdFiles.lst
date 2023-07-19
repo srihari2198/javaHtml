@@ -5,6 +5,7 @@ com/srihari/restdemo/repo/SubmissionRepoClass.class
 com/srihari/restdemo/repo/SubmissionRepository.class
 com/srihari/restdemo/service/SubmissionServiceImp.class
 com/srihari/restdemo/RestDemoApplication.class
+com/srihari/restdemo/entity/Submission.class
 com/srihari/restdemo/service/DemoService.class
 com/srihari/restdemo/model/JustString.class
 com/srihari/restdemo/controller/SubmissionController.class

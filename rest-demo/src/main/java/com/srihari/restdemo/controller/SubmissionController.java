@@ -47,9 +47,9 @@ public class SubmissionController {
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity deleteSubmission(@PathVariable String id) {
+    public ResponseEntity<Void> deleteSubmission(@PathVariable String id) {
         submissionService.deleteSubmission(id);
-      return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null) ;
+      return ResponseEntity.status(HttpStatus.NO_CONTENT).build() ;
 
     }
 

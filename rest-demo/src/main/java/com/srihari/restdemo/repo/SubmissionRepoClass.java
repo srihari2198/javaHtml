@@ -4,11 +4,13 @@ import com.srihari.restdemo.model.SubmissionDTO;
 
 import java.util.*;
 
+import lombok.Data;
 import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Data
 @Repository
 public class SubmissionRepoClass implements SubmissionRepository {
 
