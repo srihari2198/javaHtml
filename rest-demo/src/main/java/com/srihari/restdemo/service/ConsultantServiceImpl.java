@@ -1,7 +1,9 @@
 package com.srihari.restdemo.service;
 
 
+import com.srihari.restdemo.dto.ConsultantDetailDTO;
 import com.srihari.restdemo.entity.ConsultantDetail;
+import com.srihari.restdemo.entity.LeadDetail;
 import com.srihari.restdemo.repo.ConsultantRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,17 +17,22 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Autowired
     private  ConsultantRepo repository;
 
-
-
-
     @Override
     public Optional<ConsultantDetail> getConsultantDetail(long id) {
-        return repository.findById(id);
+        Optional<ConsultantDetail> r= repository.findById(id);
+        return r;
     }
 
     @Override
-    public ConsultantDetail addConsultantDetail(ConsultantDetail consultantDetail) {
-        return repository.save(consultantDetail);
+    public ConsultantDetail addConsultantDetail(ConsultantDetailDTO consultantDetail) {
+        ConsultantDetail cd= new ConsultantDetail();
+        cd.setFirstName(consultantDetail.getFirstName());
+        cd.setLastName(consultantDetail.getLastName());
+        cd.setEmailAddress(consultantDetail.getEmailAddress());
+        cd.setPhoneNumber(consultantDetail.getPhoneNumber());
+        cd.setLeadDetail(new LeadDetail());
+        cd.getLeadDetail().setId(consultantDetail.getLeadId());
+        return repository.save(cd);
     }
 
     @Override
@@ -33,7 +40,8 @@ public class ConsultantServiceImpl implements ConsultantService {
         Optional<ConsultantDetail> existingConsultantDetail = repository.findById(consultantDetail.getId());
         if (existingConsultantDetail.isPresent()) {
             ConsultantDetail updatedConsultantDetail = existingConsultantDetail.get();
-            updatedConsultantDetail.setLeadId(consultantDetail.getLeadId());
+            //updatedConsultantDetail.setLeadId(consultantDetail.getLeadId());
+            updatedConsultantDetail.setLeadDetail(consultantDetail.getLeadDetail());
             updatedConsultantDetail.setFirstName(consultantDetail.getFirstName());
             updatedConsultantDetail.setLastName(consultantDetail.getLastName());
             updatedConsultantDetail.setEmailAddress(consultantDetail.getEmailAddress());

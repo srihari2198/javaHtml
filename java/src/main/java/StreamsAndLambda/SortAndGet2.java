@@ -5,7 +5,9 @@ import Strings.Employee;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SortAndGet2 {
@@ -42,13 +44,39 @@ public class SortAndGet2 {
 
 
         List<Employee> lemp = Arrays.asList(
-                new Employee("Srihari", LocalDate.of(2023,06,04),"male"),
-                new Employee("uday", LocalDate.of(2022,01,04),"male"),
-                new Employee("narain", LocalDate.of(2023,03,04),"male"),
-                new Employee("ash", LocalDate.of(2023,06,04),"female")
-        );
-        System.out.println("---------------------------------------------");
+                new Employee(1,"Srihari", LocalDate.of(1998,06,04),"male","IT"),
+                new Employee(2,"uday", LocalDate.of(1998,01,04),"male","IT"),
+                new Employee(3,"narain", LocalDate.of(1973,03,04),"male","IT"),
+                new Employee(1,"Srihari", LocalDate.of(2021,06,04),"female","IT"),
+                new Employee(2,"uday", LocalDate.of(1998,01,04),"male","IT"),
+                new Employee(3,"narain", LocalDate.of(2001,03,04),"female","IT"),
+                new Employee(1,"Srihari", LocalDate.of(1941,06,04),"male","IT"),
+                new Employee(2,"uday", LocalDate.of(1998,01,04),"male","IT"),
+                new Employee(3,"narain", LocalDate.of(1973,03,04),"female","IT"),
+                new Employee(4,"ash", LocalDate.of(2023,06,04),"female","CSE"),
+                new Employee(1, "John", LocalDate.of(1985, 5, 15), "Male", "IT"),
+        new Employee(2, "Alice", LocalDate.of(1990, 8, 10), "female", "IT"),
+        new Employee(3, "Bob", LocalDate.of(1980, 11, 25), "male", "Finance"),
+        new Employee(4, "Emma", LocalDate.of(1982, 3, 20), "female", "IT"),
+        new Employee(5, "Mike", LocalDate.of(1978, 9, 5), "male", "IT"));
 
-        lemp.stream().filter(a -> a.getGender().equals("male") && a.getDob().isAfter(LocalDate.now().minusMonths(6))).forEach(System.out::println);
+        System.out.println("---------------------------------------------");
+        HashMap<String,Integer> hm = new HashMap<String, Integer>();
+
+        lemp.stream().filter(a ->  a.getDob().isAfter(LocalDate.now().minusYears(45))
+                                   && a.getDepartment().equals("IT") ).map(a -> a.getGender().toLowerCase()).forEach(a -> {
+                    int count=0;
+                    if(!hm.containsKey(a))
+                        hm.put(a,1);
+                    else
+                      count =   hm.get(a);
+                    hm.replace(a,count+1);
+                });
+        System.out.println(hm);
+
+
+        lemp.stream().filter(a ->  a.getDob().isAfter(LocalDate.now().minusYears(45))
+                && a.getDepartment().equals("IT") ).collect(Collectors.groupingBy(Employee::getGender,Collectors.counting()));
+        System.out.println(hm);
    }
 }

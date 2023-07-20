@@ -1,5 +1,6 @@
 package com.srihari.restdemo.service;
 
+import com.srihari.restdemo.dto.LeadDetailDTO;
 import com.srihari.restdemo.entity.LeadDetail;
 import com.srihari.restdemo.repo.LeadRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,13 @@ public class LeadServiceImpl implements LeadService{
     }
 
     @Override
-    public LeadDetail addLeadDetail(LeadDetail submission) {
-        return  repository.save(submission);
+    public LeadDetail addLeadDetail(LeadDetailDTO leadDetailDTO) {
+        LeadDetail ld = new LeadDetail();
+        ld.setEmailAddress(leadDetailDTO.getEmailAddress());
+        ld.setPhoneNumber(leadDetailDTO.getPhoneNumber());
+        ld.setFirstName(leadDetailDTO.getFirstName());
+        ld.setLastName(leadDetailDTO.getLastName());
+        return  repository.save(ld) ;
     }
 
     @Override

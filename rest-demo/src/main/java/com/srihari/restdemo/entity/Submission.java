@@ -1,10 +1,7 @@
 package com.srihari.restdemo.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 
@@ -14,11 +11,16 @@ import lombok.Data;
 public class Submission {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
-    @Column(name = "consultant_id")
-    private long consultantId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="consultant_id")
+    private ConsultantDetail consultantDetail;
+
+//    @Column(name = "consultant_id")
+//    private long consultantId;
 
     @Column(name = "submission_date")
     private String submissionDate;

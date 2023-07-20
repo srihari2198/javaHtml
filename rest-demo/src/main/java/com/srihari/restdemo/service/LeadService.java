@@ -1,5 +1,6 @@
 package com.srihari.restdemo.service;
 
+import com.srihari.restdemo.dto.LeadDetailDTO;
 import com.srihari.restdemo.entity.LeadDetail;
 import com.srihari.restdemo.entity.Submission;
 
@@ -10,11 +11,12 @@ public interface LeadService {
 
     Optional<LeadDetail> getLeadDetail(long id);
 
-    LeadDetail addLeadDetail(LeadDetail submission);
+    LeadDetail addLeadDetail(LeadDetailDTO submission);
 
     LeadDetail updateLeadDetail(LeadDetail submission);
 
     void deleteLeadDetail(long id);
+
 
     List<LeadDetail> getAll();
 }

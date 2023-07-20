@@ -1,5 +1,6 @@
 package com.srihari.restdemo.controller;
 
+import com.srihari.restdemo.dto.ConsultantDetailDTO;
 import com.srihari.restdemo.entity.ConsultantDetail;
 import com.srihari.restdemo.service.ConsultantService;
 import com.srihari.restdemo.service.ConsultantServiceImpl;
@@ -19,10 +20,12 @@ public class ConsultantController {
     private ConsultantServiceImpl service;
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<ConsultantDetail> getConsultantDetail(@PathVariable long id) {
+    public ResponseEntity<ConsultantDetailDTO> getConsultantDetail(@PathVariable long id) {
         Optional<ConsultantDetail> response = service.getConsultantDetail(id);
+
         if (response.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(response.get());
+            ConsultantDetailDTO cDto = mapToDto(response.get());
+            return ResponseEntity.status(HttpStatus.OK).body(cDto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
@@ -31,20 +34,35 @@ public class ConsultantController {
 
 
     @GetMapping("/getAll")
-    public List<ConsultantDetail> getAllConsultantDetails() {
-        return service.getAll();
+    public List<ConsultantDetailDTO> getAllConsultantDetails() {
+
+        return service.getAll().stream().map(a -> mapToDto(a)).toList();
     }
 
 
 
     @GetMapping("/getByName/{name}")
-    public List<ConsultantDetail> getAllByName(@PathVariable String name) {
-        return service.getByFirstName(name);
+    public List<ConsultantDetailDTO> getAllByName(@PathVariable String name) {
+        return service.getByFirstName(name).stream().map(a -> mapToDto(a)).toList();
+    }
+
+    public static ConsultantDetailDTO mapToDto(ConsultantDetail consultantDetail){
+            ConsultantDetailDTO cDto = new ConsultantDetailDTO();
+            cDto.setId(consultantDetail.getId());
+            cDto.setLeadId(consultantDetail.getLeadDetail().getId());
+            cDto.setFirstName(consultantDetail.getFirstName());
+            cDto.setLastName(consultantDetail.getLastName());
+            cDto.setEmailAddress(consultantDetail.getEmailAddress());
+            cDto.setPhoneNumber(consultantDetail.getPhoneNumber());
+            cDto.setSubmissionList(consultantDetail.getSubmissionList().stream().map(
+                    a -> SubmissionEntityController.mapToDto(a)
+            ).toList());
+            return cDto;
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ConsultantDetail> addConsultantDetail(@RequestBody ConsultantDetail consultantDetail) {
-        ConsultantDetail savedConsultantDetail = service.addConsultantDetail(consultantDetail);
+    public ResponseEntity<ConsultantDetailDTO> addConsultantDetail(@RequestBody ConsultantDetailDTO consultantDetail) {
+        ConsultantDetailDTO savedConsultantDetail = mapToDto(service.addConsultantDetail(consultantDetail));
         return ResponseEntity.status(HttpStatus.CREATED).body(savedConsultantDetail);
     }
 

@@ -1,7 +1,9 @@
 package com.srihari.restdemo.controller;
 
+import com.srihari.restdemo.dto.ConsultantDetailDTO;
+import com.srihari.restdemo.entity.ConsultantDetail;
 import com.srihari.restdemo.entity.Submission;
-import com.srihari.restdemo.model.SubmissionDTO;
+import com.srihari.restdemo.dto.SubmissionDTO;
 import com.srihari.restdemo.service.SubmissionEntityService;
 import com.srihari.restdemo.service.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +37,8 @@ public class SubmissionEntityController {
     }
 
     @GetMapping("/getAll")
-    public List<Submission> getAll(){
-        return submissionService.getAll();
+    public List<SubmissionDTO> getAll(){
+        return submissionService.getAll().stream().map(SubmissionEntityController::mapToDto).toList();
     }
 
     @PostMapping(path="/add")
@@ -46,6 +48,26 @@ public class SubmissionEntityController {
 
         return re;
 
+    }
+
+    public static SubmissionDTO mapToDto(Submission submissionDetail){
+        SubmissionDTO sDto = new SubmissionDTO();
+        sDto.setId(submissionDetail.getId());
+        sDto.setConsultantId(submissionDetail.getConsultantDetail().getId());
+        sDto.setSubmissionDate(submissionDetail.getSubmissionDate());
+        sDto.setVendorCompany(submissionDetail.getVendorCompany());
+        sDto.setVendorName(submissionDetail.getVendorName());
+        sDto.setVendorEmailAddress(submissionDetail.getVendorEmailAddress());
+        sDto.setVendorPhoneNumber(submissionDetail.getVendorPhoneNumber());
+        sDto.setImplementationPartner(submissionDetail.getImplementationPartner());
+        sDto.setClientName(submissionDetail.getClientName());
+        sDto.setPayRate(submissionDetail.getPayRate());
+        sDto.setSubmissionStatus(submissionDetail.getSubmissionStatus());
+        sDto.setSubmissionType(submissionDetail.getSubmissionType());
+        sDto.setCity(submissionDetail.getCity());
+        sDto.setState(submissionDetail.getState());
+        sDto.setZip(submissionDetail.getZip());
+        return sDto;
     }
 
     @PutMapping("/update")

@@ -1,18 +1,22 @@
 package com.srihari.restdemo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
 public class ConsultantDetail {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
 
-    private long leadId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="lead_id")
+    private LeadDetail leadDetail;
+//    private long leadId;
 
 
     private String firstName;
@@ -25,5 +29,8 @@ public class ConsultantDetail {
 
 
     private String phoneNumber;
+
+    @OneToMany(mappedBy="consultantDetail", cascade = CascadeType.ALL)
+    List<Submission> submissionList;
 
 }

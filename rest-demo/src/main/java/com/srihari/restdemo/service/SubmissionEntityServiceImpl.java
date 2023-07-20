@@ -31,7 +31,8 @@ public class SubmissionEntityServiceImpl implements SubmissionEntityService{
         Optional<Submission> existingSubmission = repository.findById(submission.getId());
         if (existingSubmission.isPresent()) {
             Submission updatedSubmission = existingSubmission.get();
-            updatedSubmission.setConsultantId(submission.getConsultantId());
+       //     updatedSubmission.setConsultantId(submission.getConsultantId());
+            updatedSubmission.setConsultantDetail(submission.getConsultantDetail());
             updatedSubmission.setSubmissionDate(submission.getSubmissionDate());
             updatedSubmission.setVendorCompany(submission.getVendorCompany());
             updatedSubmission.setVendorName(submission.getVendorName());

@@ -1,11 +1,11 @@
 package com.srihari.restdemo.controller;
 
+import com.srihari.restdemo.dto.ConsultantDetailDTO;
+import com.srihari.restdemo.dto.LeadDetailDTO;
+import com.srihari.restdemo.dto.SubmissionDTO;
+import com.srihari.restdemo.entity.ConsultantDetail;
 import com.srihari.restdemo.entity.LeadDetail;
-import com.srihari.restdemo.entity.Submission;
-import com.srihari.restdemo.model.SubmissionDTO;
 import com.srihari.restdemo.service.LeadService;
-import com.srihari.restdemo.service.SubmissionEntityService;
-import com.srihari.restdemo.service.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/lead")
@@ -22,12 +23,14 @@ public class LeadController {
     private LeadService service;
 
     @GetMapping("get/{id}")
-    public ResponseEntity<LeadDetail> getSubmission(@PathVariable  long id) {
+    public ResponseEntity<LeadDetailDTO> getSubmission(@PathVariable  long id) {
+
+
 
         Optional<LeadDetail> response = service.getLeadDetail(id);
 
         if(response.isPresent())
-            return ResponseEntity.status(200).body(response.get());
+            return ResponseEntity.status(200).body(mapToDto(response.get()));
 
 
         else
@@ -37,14 +40,31 @@ public class LeadController {
     }
 
     @GetMapping("/getAll")
-    public List<LeadDetail> getAll(){
-        return service.getAll();
+    public List<LeadDetailDTO> getAll(){
+        List<LeadDetail> leadDetails = service.getAll();
+
+
+        return leadDetails.stream().map(
+                entity -> mapToDto(entity)
+        ).collect(Collectors.toList());
+    }
+
+
+    private static LeadDetailDTO mapToDto(LeadDetail entity) {
+        LeadDetailDTO dto = new LeadDetailDTO();
+        dto.setId(entity.getId());
+        dto.setFirstName(entity.getFirstName());
+        dto.setLastName(entity.getLastName());
+        dto.setEmailAddress(entity.getEmailAddress());
+        dto.setPhoneNumber(entity.getPhoneNumber());
+        dto.setConsultantList(entity.getConsultantList().stream().map(ConsultantController::mapToDto).collect(Collectors.toList()));
+        return dto;
     }
 
     @PostMapping(path="/add")
-    public ResponseEntity<LeadDetail> addSubmission(@RequestBody LeadDetail submission) {
+    public ResponseEntity<LeadDetail> addSubmission(@RequestBody LeadDetailDTO leadDetailDTO) {
         ResponseEntity<LeadDetail> re= new ResponseEntity<>(HttpStatus.CREATED);
-        re=ResponseEntity.status(re.getStatusCode()).body(service.addLeadDetail(submission));
+        re=ResponseEntity.status(re.getStatusCode()).body(service.addLeadDetail(leadDetailDTO));
 
         return re;
 
