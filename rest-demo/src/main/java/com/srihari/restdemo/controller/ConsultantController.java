@@ -54,9 +54,10 @@ public class ConsultantController {
             cDto.setLastName(consultantDetail.getLastName());
             cDto.setEmailAddress(consultantDetail.getEmailAddress());
             cDto.setPhoneNumber(consultantDetail.getPhoneNumber());
-            cDto.setSubmissionList(consultantDetail.getSubmissionList().stream().map(
-                    a -> SubmissionEntityController.mapToDto(a)
-            ).toList());
+            if(consultantDetail.getSubmissionList()!=null)
+            cDto.setSubmissionList(consultantDetail.getSubmissionList().stream().
+                    map(SubmissionEntityController::mapToDto).toList());
+
             return cDto;
     }
 
@@ -67,7 +68,7 @@ public class ConsultantController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ConsultantDetail> updateConsultantDetail(@RequestBody ConsultantDetail consultantDetail) {
+    public ResponseEntity<ConsultantDetail> updateConsultantDetail(@RequestBody ConsultantDetailDTO consultantDetail) {
         ConsultantDetail updatedConsultantDetail = service.updateConsultantDetail(consultantDetail);
         if (updatedConsultantDetail != null) {
             return ResponseEntity.status(HttpStatus.OK).body(updatedConsultantDetail);

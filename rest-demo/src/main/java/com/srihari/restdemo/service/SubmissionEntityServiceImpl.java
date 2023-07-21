@@ -1,8 +1,9 @@
 package com.srihari.restdemo.service;
 
 
+import com.srihari.restdemo.entity.ConsultantDetail;
 import com.srihari.restdemo.entity.Submission;
-import com.srihari.restdemo.model.SubmissionDTO;
+import com.srihari.restdemo.dto.SubmissionDTO;
 import com.srihari.restdemo.repo.SubmissionEntityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,31 @@ public class SubmissionEntityServiceImpl implements SubmissionEntityService{
 
     }
 
+
+
     @Override
-    public Submission addSubmission(Submission submission) {
-       return  repository.save(submission);
+    public Submission addSubmission(SubmissionDTO submission) {
+
+        Submission updatedSubmission =new Submission();
+        ConsultantDetail cd = new ConsultantDetail();
+        cd.setId(submission.getConsultantId());
+       updatedSubmission.setConsultantDetail(cd);
+
+        updatedSubmission.setSubmissionDate(submission.getSubmissionDate());
+        updatedSubmission.setVendorCompany(submission.getVendorCompany());
+        updatedSubmission.setVendorName(submission.getVendorName());
+        updatedSubmission.setVendorEmailAddress(submission.getVendorEmailAddress());
+        updatedSubmission.setVendorPhoneNumber(submission.getVendorPhoneNumber());
+        updatedSubmission.setImplementationPartner(submission.getImplementationPartner());
+        updatedSubmission.setClientName(submission.getClientName());
+        updatedSubmission.setPayRate(submission.getPayRate());
+        updatedSubmission.setSubmissionStatus(submission.getSubmissionStatus());
+        updatedSubmission.setSubmissionType(submission.getSubmissionType());
+        updatedSubmission.setCity(submission.getCity());
+        updatedSubmission.setState(submission.getState());
+        updatedSubmission.setZip(submission.getZip());
+
+       return  repository.save(updatedSubmission);
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface LeadService {
 
     LeadDetail addLeadDetail(LeadDetailDTO submission);
 
-    LeadDetail updateLeadDetail(LeadDetail submission);
+    LeadDetail updateLeadDetail(LeadDetailDTO submission);
 
     void deleteLeadDetail(long id);
 

@@ -13,7 +13,7 @@ public interface ConsultantService {
 
     ConsultantDetail addConsultantDetail(ConsultantDetailDTO consultantDetail);
 
-    ConsultantDetail updateConsultantDetail(ConsultantDetail consultantDetail);
+    ConsultantDetail updateConsultantDetail(ConsultantDetailDTO consultantDetail);
 
     void deleteConsultantDetail(long id);
 

@@ -57,7 +57,8 @@ public class LeadController {
         dto.setLastName(entity.getLastName());
         dto.setEmailAddress(entity.getEmailAddress());
         dto.setPhoneNumber(entity.getPhoneNumber());
-        dto.setConsultantList(entity.getConsultantList().stream().map(ConsultantController::mapToDto).collect(Collectors.toList()));
+        dto.setConsultantList(entity.getConsultantList().stream().
+                map(ConsultantController::mapToDto).collect(Collectors.toList()));
         return dto;
     }
 
@@ -71,7 +72,7 @@ public class LeadController {
     }
 
     @PutMapping("/update")
-    public LeadDetail updateSubmission( @RequestBody LeadDetail submission) {
+    public LeadDetail updateSubmission( @RequestBody LeadDetailDTO submission) {
         return  service.updateLeadDetail(submission);
 
     }

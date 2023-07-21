@@ -32,16 +32,19 @@ public class ConsultantServiceImpl implements ConsultantService {
         cd.setPhoneNumber(consultantDetail.getPhoneNumber());
         cd.setLeadDetail(new LeadDetail());
         cd.getLeadDetail().setId(consultantDetail.getLeadId());
-        return repository.save(cd);
+        ConsultantDetail r=repository.save(cd);
+        return r;
     }
 
     @Override
-    public ConsultantDetail updateConsultantDetail(ConsultantDetail consultantDetail) {
+    public ConsultantDetail updateConsultantDetail(ConsultantDetailDTO consultantDetail) {
         Optional<ConsultantDetail> existingConsultantDetail = repository.findById(consultantDetail.getId());
         if (existingConsultantDetail.isPresent()) {
             ConsultantDetail updatedConsultantDetail = existingConsultantDetail.get();
             //updatedConsultantDetail.setLeadId(consultantDetail.getLeadId());
-            updatedConsultantDetail.setLeadDetail(consultantDetail.getLeadDetail());
+            LeadDetail ld =new LeadDetail();
+            ld.setId(consultantDetail.getLeadId());
+            updatedConsultantDetail.setLeadDetail(ld);
             updatedConsultantDetail.setFirstName(consultantDetail.getFirstName());
             updatedConsultantDetail.setLastName(consultantDetail.getLastName());
             updatedConsultantDetail.setEmailAddress(consultantDetail.getEmailAddress());

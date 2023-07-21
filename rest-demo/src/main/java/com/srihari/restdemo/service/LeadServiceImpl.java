@@ -30,7 +30,7 @@ public class LeadServiceImpl implements LeadService{
     }
 
     @Override
-    public LeadDetail updateLeadDetail(LeadDetail leadDetail) {
+    public LeadDetail updateLeadDetail(LeadDetailDTO leadDetail) {
         Optional<LeadDetail> existingLeadDetail = repository.findById(leadDetail.getId());
         if (existingLeadDetail.isPresent()) {
             LeadDetail updatedLeadDetail = existingLeadDetail.get();

@@ -22,12 +22,12 @@ public class SubmissionEntityController {
     private SubmissionEntityService submissionService;
 
     @GetMapping("get/{id}")
-    public ResponseEntity<Submission> getSubmission(@PathVariable  long id) {
+    public ResponseEntity<SubmissionDTO> getSubmission(@PathVariable  long id) {
 
         Optional<Submission> response = submissionService.getSubmission(id);
 
         if(response.isPresent())
-        return ResponseEntity.status(200).body(response.get());
+        return ResponseEntity.status(200).body(mapToDto(response.get()));
 
 
         else
@@ -42,9 +42,9 @@ public class SubmissionEntityController {
     }
 
     @PostMapping(path="/add")
-    public ResponseEntity<Submission> addSubmission(@RequestBody Submission submission) {
-        ResponseEntity<Submission> re= new ResponseEntity<>(HttpStatus.CREATED);
-        re=ResponseEntity.status(re.getStatusCode()).body(submissionService.addSubmission(submission));
+    public ResponseEntity<SubmissionDTO> addSubmission(@RequestBody SubmissionDTO submission) {
+        ResponseEntity<SubmissionDTO> re= new ResponseEntity<>(HttpStatus.CREATED);
+        re=ResponseEntity.status(re.getStatusCode()).body(mapToDto(submissionService.addSubmission(submission)));
 
         return re;
 
